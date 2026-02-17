@@ -1,0 +1,205 @@
+/* app/components/HeroSection.module.css */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5% 0 10%;
+  flex-grow: 1;
+  position: relative;
+  min-height: calc(100vh - 100px);
+  
+  /* AESTHETIC UPGRADE: Deep Black-to-Crimson Gradient */
+  background: radial-gradient(circle at 80% 50%, #2b0000 0%, #050505 60%, #000000 100%);
+  overflow: hidden; /* Keeps the glow inside */
+}
+
+/* Optional: Adds a subtle noise texture for a "film grain" aesthetic */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjAzIi8+PC9zdmc+");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Text Content (Left Side) */
+.content {
+  max-width: 50%;
+  z-index: 2;
+}
+
+.subHeading {
+  font-size: 0.9rem;
+  letter-spacing: 4px; /* Wider spacing for cinematic look */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 600;
+  
+  /* AESTHETIC UPGRADE: Neon Red Glow */
+  color: #ff3333;
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.6);
+}
+
+.heading {
+  font-size: 4rem; /* Slightly larger */
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 50px;
+  
+  /* AESTHETIC UPGRADE: Silver/White Gradient Text */
+  background: linear-gradient(to bottom right, #ffffff 30%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* subtle drop shadow */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.8));
+}
+
+/* Call to Action Button - Glassmorphism Style */
+.ctaBtn {
+  display: inline-block;
+  padding: 18px 40px;
+  
+  /* Glassy Background */
+  background: rgba(255, 51, 51, 0.05); 
+  border: 1px solid rgba(255, 51, 51, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Deep shadow */
+}
+
+/* The little accent line on the button */
+.ctaBtn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%; 
+  width: 2px;
+  background-color: #ff3333;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.ctaBtn:hover::before {
+  width: 100%; /* Fill effect on hover */
+}
+
+.ctaBtn:hover {
+  border-color: #ff3333;
+  box-shadow: 0 0 30px rgba(255, 51, 51, 0.4); /* Red Glow */
+  text-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+/* Image Wrapper (Right Side) */
+.imageWrapper {
+  width: 45%;
+  height: 550px;
+  position: relative;
+  z-index: 1;
+}
+
+/* The Image itself */
+.heroImage {
+  object-fit: cover;
+  border-radius: 2px;
+  
+  /* AESTHETIC UPGRADE: Masking the bottom slightly for blend */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  
+  filter: contrast(1.2) saturate(0) brightness(0.9); /* B&W moody image */
+  transition: filter 0.5s ease;
+}
+
+/* Color comes back slightly on hover */
+.imageWrapper:hover .heroImage {
+  filter: contrast(1.1) saturate(0.5) brightness(1); 
+}
+
+/* A Red glow behind the image */
+.imageWrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Pagination / Counters */
+.pagination {
+  position: absolute;
+  bottom: 50px;
+  left: 10%;
+  display: flex;
+  gap: 30px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.2);
+  z-index: 10;
+}
+
+.activePage {
+  color: #ff3333;
+  text-shadow: 0 0 10px #ff3333;
+  border-bottom: 2px solid #ff3333;
+  padding-bottom: 5px;
+}
+
+/* Background Graphic / Fade */
+.bgGraphic {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  /* Seamless fade to the black section below */
+  background: linear-gradient(to top, #050505 10%, transparent); 
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+    background: radial-gradient(circle at 50% 50%, #1a0000 0%, #000000 100%);
+  }
+  .content {
+    max-width: 100%;
+    margin-bottom: 60px;
+  }
+  .heading {
+    font-size: 3rem;
+  }
+  .imageWrapper {
+    width: 100%;
+    height: 350px;
+  }
+  .pagination {
+    display: none;
+  }
+}

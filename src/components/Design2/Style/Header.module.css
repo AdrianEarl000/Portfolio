@@ -1,0 +1,119 @@
+/* Style/Header.module.css */
+
+.header {
+  position: fixed; /* Fixed so it stays on top while scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.4s ease-in-out; /* Smooth animation for background */
+  background: transparent; /* Start transparent */
+}
+
+/* State when user scrolls down */
+.scrolled {
+  padding: 1rem 3rem; /* Shrink padding slightly */
+  background: rgba(5, 5, 5, 0.85); /* Dark Glass Background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 51, 51, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* Navigation Styling */
+.nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7); /* Default dimmed white */
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s ease;
+  padding-bottom: 5px; /* Spacing for the underline */
+}
+
+/* --- THE UNDERLINE (Hidden by default) --- */
+.nav a::after {
+  content: '';
+  position: absolute;
+  width: 0; /* Starts at 0 width */
+  height: 2px; /* Thickness of the line */
+  bottom: 0;
+  left: 0;
+  background-color: #ff3333; /* Red Line */
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 51, 51, 0.6); /* Slight red glow on the line */
+}
+
+/* --- HOVER STATE --- */
+.nav a:hover {
+  color: #ff3333; /* Text turns red */
+}
+
+.nav a:hover::after {
+  width: 100%; /* Line expands to full width */
+}
+
+/* --- ACTIVE STATE (Same visual as Hover) --- */
+.active {
+  color: #ff3333 !important; /* Text stays red */
+}
+
+/* Ensure the underline stays visible when active */
+.nav a.active::after {
+  width: 100%; 
+}
+
+/* Social Icons */
+.socialIcons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.socialIcons a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.socialIcons a:hover {
+  color: #ff3333;
+  transform: translateY(-3px) scale(1.1);
+  filter: drop-shadow(0 0 5px #ff3333);
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .header {
+    padding: 1rem;
+  }
+  .nav {
+    display: none; /* You might need a hamburger menu for mobile later */
+  }
+}

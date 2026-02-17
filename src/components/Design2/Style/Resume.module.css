@@ -1,0 +1,143 @@
+/* Style/Resume.module.css */
+
+.resumeSection {
+  /* Match the dark theme */
+  background-color: #050505;
+  color: #ffffff;
+  padding: 6rem 1rem;
+  position: relative;
+  /* Optional: subtle gradient to separate from Portfolio */
+  background: linear-gradient(to top, #050505 0%, #0a0a0a 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.header h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.header h2 span {
+  /* Red Gradient Text */
+  background: linear-gradient(to right, #ff3333, #8a0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
+}
+
+/* Two Column Layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.column {
+  flex: 1;
+  min-width: 350px; /* Stacks on mobile */
+}
+
+.columnTitle {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+}
+
+.icon {
+  color: #ff3333; /* Red Icon */
+}
+
+/* The Grid of Cards */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Resume Card Styling */
+.card {
+  /* Dark Glassy Card */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent; /* Prepare for hover effect */
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-5px);
+  /* Red Accent on Hover */
+  border-left: 3px solid #ff3333;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Date Badge */
+.date {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ff3333; /* Red Text */
+  background: rgba(255, 51, 51, 0.1); /* Red BG Tint */
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.card h4 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.subtitle {
+  display: block;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  line-height: 1.6;
+}
+
+.location {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .header h2 {
+    font-size: 2.2rem;
+  }
+}

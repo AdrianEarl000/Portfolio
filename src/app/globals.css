@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-:root {
+/* DESIGN 1 */
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +25,58 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* DESIGN 2 - DARK & RED THEME */
+:root {
+  /* Core Colors */
+  --primary-bg: #050505;       /* Deep Black */
+  --accent-red: #ff3333;       /* Bright Red Pop */
+  --dark-red: #8a0000;         /* Darker Red for gradients */
+  --text-white: #ffffff;
+  
+  /* Background: Mostly black with a very subtle red glow at the bottom */
+  --gradient-bg: linear-gradient(180deg, #050505 0%, #050505 60%, #1a0000 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Apply the dark theme */
+  background: var(--gradient-bg);
+  background-color: var(--primary-bg); /* Fallback */
+  color: var(--text-white);
+  
+  /* Layout helpers */
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif; /* Or your Geist font variables */
+}
+
+/* Global Link Styles */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for all basic links to turn Red */
+a:hover {
+  color: var(--accent-red);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Optional: Selection color (when you highlight text) */
+::selection {
+  background-color: var(--accent-red);
+  color: white;
 }

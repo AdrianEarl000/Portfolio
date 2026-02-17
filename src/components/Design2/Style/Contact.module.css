@@ -1,0 +1,174 @@
+/* Style/Contact.module.css */
+
+.contactSection {
+  /* Match the deep dark theme */
+  background: linear-gradient(to top, #050505 0%, #1a0000 100%);
+  color: #ffffff;
+  padding: 6rem 1rem;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.header h2 span {
+  /* Red Gradient Text */
+  background: linear-gradient(to right, #ff3333, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Layout: Two Columns */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.columnTitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #fff;
+  border-left: 4px solid #ff3333; /* Red Accent Line */
+  padding-left: 15px;
+}
+
+/* --- Left Column: Form --- */
+.formColumn {
+  flex: 3;
+  min-width: 300px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input, 
+.textarea {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05); /* Dark Glassy Input */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+/* Focus Effect: Red Glow */
+.input:focus, 
+.textarea:focus {
+  border-color: #ff3333;
+  box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.submitBtn {
+  align-self: flex-start;
+  padding: 15px 35px;
+  background-color: #ff3333;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(255, 51, 51, 0.3);
+}
+
+.submitBtn:hover {
+  transform: translateY(-3px);
+  background-color: #d90000; /* Darker red on hover */
+  box-shadow: 0 10px 30px rgba(255, 51, 51, 0.5);
+}
+
+/* --- Right Column: Info --- */
+.infoColumn {
+  flex: 2;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start; /* Aligns icon with top of text */
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.infoItem:hover {
+  transform: translateX(10px);
+  border-color: rgba(255, 51, 51, 0.3);
+}
+
+.iconBox {
+  font-size: 1.5rem;
+  color: #ff3333;
+  background: rgba(255, 51, 51, 0.1);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.infoContent h4 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.infoContent p {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  
+  .submitBtn {
+    width: 100%; /* Full width button on mobile */
+    justify-content: center;
+  }
+}

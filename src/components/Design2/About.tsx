@@ -123,7 +123,7 @@ export default function About() {
 
             {/* Tech tags */}
             <div className={styles.tags}>
-              {["Next.js","React","Tailwind CSS","TypeScript","Node.js","Mobile Dev"].map((t) => (
+              {["Next.js","React","Tailwind CSS","TypeScript","Node.js",].map((t) => (
                 <span key={t} className={styles.tag}>{t}</span>
               ))}
             </div>

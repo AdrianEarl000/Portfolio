@@ -1,143 +1,263 @@
 /* Style/Resume.module.css */
 
-.resumeSection {
-  /* Match the dark theme */
-  background-color: #050505;
-  color: #ffffff;
-  padding: 6rem 1rem;
+/* ── SECTION ─────────────────────────────────────────────── */
+.resume {
   position: relative;
-  /* Optional: subtle gradient to separate from Portfolio */
-  background: linear-gradient(to top, #050505 0%, #0a0a0a 100%);
+  background: linear-gradient(to bottom, #050505 0%, #0d0000 60%, #1a0000 100%);
+  color: #fff;
+  padding: 8rem 1rem;
+  overflow: hidden;
 }
+
+.canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.08; pointer-events: none; z-index: 0;
+}
+
+.resume::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse, rgba(200,0,0,0.1) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
+}
+
+.resume::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none; z-index: 1;
+}
+
+/* Corner brackets */
+.bracket { position: absolute; z-index: 3; width: 40px; height: 40px; pointer-events: none; }
+.tl { top: 20px; left: 20px;   border-top: 1px solid #cc0000; border-left: 1px solid #cc0000; }
+.tr { top: 20px; right: 20px;  border-top: 1px solid #cc0000; border-right: 1px solid #cc0000; }
+.bl { bottom: 20px; left: 20px;  border-bottom: 1px solid #cc0000; border-left: 1px solid #cc0000; }
+.br { bottom: 20px; right: 20px; border-bottom: 1px solid #cc0000; border-right: 1px solid #cc0000; }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative; z-index: 2;
 }
 
-/* Header */
-.header {
-  text-align: center;
-  margin-bottom: 5rem;
+/* ── HEADER ──────────────────────────────────────────────── */
+.header { text-align: center; margin-bottom: 5rem; }
+
+.hudTag {
+  display: inline-block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: 5px;
+  color: #cc0000; text-transform: uppercase;
+  margin-bottom: 12px; opacity: 0.85;
 }
+.hudTag::before { content: '▶ '; }
 
 .header h2 {
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 400; letter-spacing: 6px;
+  color: #fff; line-height: 1;
+  text-shadow: 3px 3px 0 #2a0000, 0 0 40px rgba(200,0,0,0.25);
 }
-
 .header h2 span {
-  /* Red Gradient Text */
-  background: linear-gradient(to right, #ff3333, #8a0000);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
+  color: #cc0000;
+  text-shadow: 0 0 30px rgba(200,0,0,0.6), 3px 3px 0 #3a0000;
 }
 
-/* Two Column Layout */
+.headerBar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 18px auto 0; width: fit-content;
+}
+.headerBar span { display: block; height: 1px; width: 60px; background: #cc0000; animation: barPulse 2s ease-in-out infinite; }
+.headerBar em {
+  font-style: normal;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; color: #cc0000; opacity: 0.7;
+}
+
+/* ── COLUMNS ─────────────────────────────────────────────── */
 .row {
   display: flex;
+  gap: 3rem;
   flex-wrap: wrap;
-  gap: 4rem;
 }
+.column { flex: 1; min-width: 300px; }
 
-.column {
-  flex: 1;
-  min-width: 350px; /* Stacks on mobile */
-}
-
-.columnTitle {
-  font-size: 1.8rem;
+/* Column heading */
+.colTitle {
+  display: flex; align-items: center; gap: 12px;
   margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 15px;
+}
+.colTitleIcon {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(200,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #cc0000;
+  background: rgba(200,0,0,0.06);
+  flex-shrink: 0;
+}
+.colTitle h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 4px;
   color: #fff;
+  text-shadow: 0 0 20px rgba(200,0,0,0.2);
 }
 
-.icon {
-  color: #ff3333; /* Red Icon */
-}
-
-/* The Grid of Cards */
+/* ── TIMELINE ────────────────────────────────────────────── */
 .timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: flex; flex-direction: column;
+  gap: 0; position: relative;
 }
 
-/* Resume Card Styling */
+/* Vertical red thread */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, #cc0000, rgba(200,0,0,0.08));
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
 .card {
-  /* Dark Glassy Card */
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 6px;
   position: relative;
-  transition: all 0.3s ease;
-  border-left: 3px solid transparent; /* Prepare for hover effect */
+  padding: 0 0 2rem 36px;
 }
 
-.card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-5px);
-  /* Red Accent on Hover */
-  border-left: 3px solid #ff3333;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+/* Timeline dot */
+.card::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 6px;
+  width: 9px; height: 9px;
+  background: #cc0000;
+  border: 2px solid #0d0000;
+  box-shadow: 0 0 8px rgba(200,0,0,0.6);
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover::before {
+  transform: scale(1.4);
+  box-shadow: 0 0 16px rgba(200,0,0,0.9);
 }
 
-/* Date Badge */
+/* Card inner */
+.cardInner {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 2px solid transparent;
+  padding: 1.4rem 1.6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+              border-color 0.35s ease,
+              background 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+/* Corner accents */
+.cardInner::before, .cardInner::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  pointer-events: none;
+  transition: border-color 0.35s;
+}
+.cardInner::before { top: 0; right: 0; border-top: 1px solid transparent; border-right: 1px solid transparent; }
+.cardInner::after  { bottom: 0; left: 0; border-bottom: 1px solid transparent; border-left: 1px solid transparent; }
+
+.card:hover .cardInner {
+  transform: translateX(6px);
+  border-left-color: #cc0000;
+  background: rgba(200,0,0,0.04);
+  box-shadow: -4px 0 20px rgba(200,0,0,0.12), 0 8px 30px rgba(0,0,0,0.4);
+}
+.card:hover .cardInner::before { border-color: rgba(200,0,0,0.4); }
+.card:hover .cardInner::after  { border-color: rgba(200,0,0,0.4); }
+
+/* Node ID */
+.nodeId {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: 1px;
+  color: rgba(200,0,0,0.2);
+}
+
+/* Date */
 .date {
   display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #ff3333; /* Red Text */
-  background: rgba(255, 51, 51, 0.1); /* Red BG Tint */
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: 2px;
+  color: #cc0000;
+  border: 1px solid rgba(200,0,0,0.3);
+  padding: 3px 10px;
+  background: rgba(200,0,0,0.06);
+  text-transform: uppercase; margin-bottom: 10px;
 }
+.date::before { content: '// '; }
 
-.card h4 {
-  font-size: 1.4rem;
-  margin-bottom: 5px;
-  color: #fff;
+/* Title */
+.cardInner h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 1.5px;
+  color: #fff; margin-bottom: 4px; line-height: 1.2;
+  transition: text-shadow 0.3s;
 }
+.card:hover .cardInner h4 { text-shadow: 0 0 16px rgba(200,0,0,0.4); }
 
+/* Subtitle */
 .subtitle {
   display: block;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 1rem;
-  font-style: italic;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  color: #cc0000; margin-bottom: 10px; text-transform: uppercase;
+}
+.subtitle::before { content: '▶ '; }
+
+/* Description */
+.cardInner p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  line-height: 1.9; margin-bottom: 8px;
+  border-left: 2px solid rgba(200,0,0,0.12);
+  padding-left: 10px;
 }
 
-.card p {
-  font-size: 0.9rem;
-  color: #b0b0b0;
-  line-height: 1.6;
-}
-
+/* Location */
 .location {
-  display: block;
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase; margin-top: 4px;
+}
+.location::before { content: '📍'; font-size: 9px; opacity: 0.5; }
+
+/* Bottom grow line */
+.cardLine {
+  position: absolute; bottom: 0; left: 0;
+  height: 1px; width: 0;
+  background: linear-gradient(to right, #cc0000, #ff4444);
+  box-shadow: 0 0 6px #cc0000;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+.card:hover .cardLine { width: 100%; }
+
+/* ── KEYFRAMES ───────────────────────────────────────────── */
+@keyframes barPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
-/* Mobile Responsive */
+/* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    gap: 3rem;
-  }
-  
-  .header h2 {
-    font-size: 2.2rem;
-  }
+  .row { flex-direction: column; }
+  .column { min-width: 100%; }
 }

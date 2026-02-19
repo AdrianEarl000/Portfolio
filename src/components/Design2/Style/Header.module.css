@@ -1,119 +1,225 @@
 /* Style/Header.module.css */
 
+/* ── HEADER ──────────────────────────────────────────────── */
 .header {
-  position: fixed; /* Fixed so it stays on top while scrolling */
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1.5rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-  transition: all 0.4s ease-in-out; /* Smooth animation for background */
-  background: transparent; /* Start transparent */
-}
-
-/* State when user scrolls down */
-.scrolled {
-  padding: 1rem 3rem; /* Shrink padding slightly */
-  background: rgba(5, 5, 5, 0.85); /* Dark Glass Background */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 51, 51, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
-
-/* Logo Styling */
-.logo {
+  padding: 1.4rem 3rem;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 1.3rem;
-  text-decoration: none;
-  color: #fff;
-  letter-spacing: 1px;
+  justify-content: space-between;
+  gap: 2rem;
+  background: transparent;
+  transition: padding 0.4s ease, background 0.4s ease,
+              border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Navigation Styling */
+/* Scrolled state */
+.scrolled {
+  padding: 0.9rem 3rem;
+  background: rgba(4, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,0,0,0.2);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 1px 0 rgba(200,0,0,0.1);
+}
+
+/* Top red glow line when scrolled */
+.scrolled::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, #cc0000 25%, #cc0000 75%, transparent);
+  box-shadow: 0 0 10px rgba(200,0,0,0.4);
+}
+
+/* ── LOGO ────────────────────────────────────────────────── */
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(200,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  color: #cc0000; font-size: 11px;
+  font-family: 'Share Tech Mono', monospace;
+  background: rgba(200,0,0,0.08);
+  transition: all 0.3s;
+  position: relative;
+}
+.logoIcon::before {
+  content: '';
+  position: absolute; inset: -3px;
+  border: 1px solid rgba(200,0,0,0.15);
+}
+.logo:hover .logoIcon {
+  background: #cc0000; color: #fff;
+  box-shadow: 0 0 14px rgba(200,0,0,0.5);
+}
+
+.logoText {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 4px; color: #fff;
+  text-shadow: 0 0 20px rgba(200,0,0,0.15);
+  transition: text-shadow 0.3s;
+}
+.logoText span { color: #cc0000; }
+.logo:hover .logoText { text-shadow: 0 0 25px rgba(200,0,0,0.35); }
+
+/* ── DESKTOP NAV ─────────────────────────────────────────── */
 .nav ul {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex; gap: 0;
+  list-style: none; padding: 0; margin: 0;
 }
 
 .nav a {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.7); /* Default dimmed white */
-  font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  position: relative;
-  transition: color 0.3s ease;
-  padding-bottom: 5px; /* Spacing for the underline */
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none; text-transform: uppercase;
+  padding: 6px 16px;
+  position: relative; overflow: hidden;
+  transition: color 0.3s;
+  border-right: 1px solid rgba(200,0,0,0.1);
 }
+.nav li:first-child a { border-left: 1px solid rgba(200,0,0,0.1); }
 
-/* --- THE UNDERLINE (Hidden by default) --- */
+/* Fill sweep */
+.nav a::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(200,0,0,0.08);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.25s ease; z-index: 0;
+}
+/* Bottom red glow line */
 .nav a::after {
   content: '';
-  position: absolute;
-  width: 0; /* Starts at 0 width */
-  height: 2px; /* Thickness of the line */
-  bottom: 0;
-  left: 0;
-  background-color: #ff3333; /* Red Line */
+  position: absolute; bottom: 0; left: 0;
+  height: 1px; width: 0;
+  background: #cc0000; box-shadow: 0 0 6px #cc0000;
   transition: width 0.3s ease;
-  box-shadow: 0 0 8px rgba(255, 51, 51, 0.6); /* Slight red glow on the line */
 }
+.nav a span { position: relative; z-index: 1; }
 
-/* --- HOVER STATE --- */
-.nav a:hover {
-  color: #ff3333; /* Text turns red */
-}
+.nav a:hover { color: #cc0000; }
+.nav a:hover::before { transform: scaleY(1); }
+.nav a:hover::after { width: 100%; }
 
-.nav a:hover::after {
-  width: 100%; /* Line expands to full width */
-}
+.nav a.active { color: #cc0000; }
+.nav a.active::after { width: 100%; }
+.nav a.active::before { transform: scaleY(1); }
 
-/* --- ACTIVE STATE (Same visual as Hover) --- */
-.active {
-  color: #ff3333 !important; /* Text stays red */
-}
-
-/* Ensure the underline stays visible when active */
-.nav a.active::after {
-  width: 100%; 
-}
-
-/* Social Icons */
+/* ── SOCIAL ICONS ────────────────────────────────────────── */
 .socialIcons {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  display: flex; gap: 8px; align-items: center; flex-shrink: 0;
 }
 
-.socialIcons a {
-  color: rgba(255, 255, 255, 0.8);
+.socialIcon {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  border: 1px solid rgba(200,0,0,0.2);
+  color: rgba(255,255,255,0.35);
+  text-decoration: none; font-size: 11px;
+  background: rgba(200,0,0,0.03);
+  transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.socialIcon::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: #cc0000;
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.3s ease; z-index: 0;
+}
+.socialIcon > * { position: relative; z-index: 1; }
+.socialIcon:hover {
+  color: #fff; border-color: #cc0000;
+  box-shadow: 0 0 12px rgba(200,0,0,0.4);
+}
+.socialIcon:hover::before { transform: scaleY(1); }
+
+/* ── HAMBURGER ───────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 4px; flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1px;
+  background: #cc0000;
   transition: all 0.3s ease;
-  font-size: 1.1rem;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── MOBILE OVERLAY ──────────────────────────────────────── */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 998;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.overlayOpen {
+  opacity: 1; pointer-events: all;
 }
 
-.socialIcons a:hover {
-  color: #ff3333;
-  transform: translateY(-3px) scale(1.1);
-  filter: drop-shadow(0 0 5px #ff3333);
+/* ── MOBILE MENU ─────────────────────────────────────────── */
+.mobileMenu {
+  position: fixed;
+  top: 0; right: -100%;
+  width: min(280px, 80vw); height: 100vh;
+  background: rgba(4,0,0,0.97);
+  -webkit-backdrop-filter: blur();
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(200,0,0,0.2);
+  z-index: 999;
+  padding: 5rem 2rem 2rem;
+  display: flex; flex-direction: column; gap: 0;
+  transition: right 0.4s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+}
+.mobileMenu::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
 }
 
-/* Mobile Responsive */
+.mobileMenuOpen { right: 0; }
+
+.mobileMenu a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none; text-transform: uppercase;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(200,0,0,0.08);
+  transition: color 0.25s, padding-left 0.25s;
+  position: relative;
+}
+.mobileMenu a::before { content: '▶ '; color: rgba(200,0,0,0); transition: color 0.25s; }
+.mobileMenu a:hover { color: #cc0000; padding-left: 8px; }
+.mobileMenu a:hover::before { color: #cc0000; }
+.mobileMenu a.active { color: #cc0000; }
+.mobileMenu a.active::before { color: #cc0000; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .header {
-    padding: 1rem;
-  }
-  .nav {
-    display: none; /* You might need a hamburger menu for mobile later */
-  }
+  .header { padding: 1.2rem 1.5rem; }
+  .scrolled { padding: 0.8rem 1.5rem; }
+  .nav { display: none; }
+  .hamburger { display: flex; }
+  .socialIcons { display: none; }
 }

@@ -1,129 +1,119 @@
-"use client"; // Required for scroll detection
+"use client";
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import { FaFacebookF, FaGithub } from "react-icons/fa6";
+import styles from "./Style/Header.module.css";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import styles from './Style/Header.module.css'; 
-import { FaCode, FaFacebookF, FaInstagram, FaGithub } from 'react-icons/fa6';
+const NAV_LINKS = [
+  { id: "home",           label: "Home"          },
+  { id: "about",          label: "About"         },
+  { id: "portfolio",      label: "Portfolio"     },
+  { id: "certifications", label: "Certs"         },
+  { id: "resume",         label: "Resume"        },
+  { id: "contact",        label: "Contact"       },
+];
 
-const Header2 = () => {
-  const [activeSection, setActiveSection] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Header() {
+  const [isScrolled,   setIsScrolled]   = useState(false);
+  const [activeSection,setActiveSection]= useState("home");
+  const [menuOpen,     setMenuOpen]     = useState(false);
 
- useEffect(() => {
-    const handleScroll = () => {
-      // 1. Header Background
-      if (window.scrollY > 50) setIsScrolled(true);
-      else setIsScrolled(false);
-
-      // 2. Section Detection
-      const sections = ['home', 'portfolio', 'resume', 'about', 'contact'];
-      
-      // Calculate middle of viewport
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-   
-
-  // Helper for smooth scrolling when clicking links
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+  const scrollTo = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(id);
+    setMenuOpen(false);
   };
 
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 50);
+    const scrollPos = window.scrollY + window.innerHeight / 3;
+    for (const { id } of NAV_LINKS) {
+      const el = document.getElementById(id);
+      if (el && scrollPos >= el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight) {
+        setActiveSection(id);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  // Lock scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      {/* Logo */}
-      <Link href="#home" onClick={(e) => handleScrollTo(e, 'home')} className={styles.logo}>
-        <span className={styles.logoIconWrapper}>
-            <FaCode size={20} color="#ff3333" />
-        </span>
-        <span>ADRIAN EARL</span>
-      </Link>
+    <>
+      <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
+        {/* Logo */}
+        <Link href="#home" onClick={(e) => scrollTo(e, "home")} className={styles.logo}>
+          <div className={styles.logoIcon}>&lt;/&gt;</div>
+          <span className={styles.logoText}>
+            ADRIAN <span>EARL</span>
+          </span>
+        </Link>
 
-      {/* Navigation */}
-      <nav className={styles.nav}>
-        <ul className={styles.navList}>
-          <li>
-            <a 
-              href="#home" 
-              onClick={(e) => handleScrollTo(e, 'home')}
-              className={activeSection === 'home' ? styles.active : ''}
-            >
-              HOME
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#portfolio" 
-              onClick={(e) => handleScrollTo(e, 'portfolio')}
-              className={activeSection === 'portfolio' ? styles.active : ''}
-            >
-              PORTFOLIO
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#resume" 
-              onClick={(e) => handleScrollTo(e, 'resume')}
-              className={activeSection === 'resume' ? styles.active : ''}
-            >
-              RESUME
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#about" 
-              onClick={(e) => handleScrollTo(e, 'about')}
-              className={activeSection === 'about' ? styles.active : ''}
-            >
-              ABOUT ME
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#contact" 
-              onClick={(e) => handleScrollTo(e, 'contact')}
-              className={activeSection === 'contact' ? styles.active : ''}
-            >
-              CONTACT
-            </a>
-          </li>
-        </ul>
-      </nav>
+        {/* Desktop Nav */}
+        <nav className={styles.nav}>
+          <ul>
+            {NAV_LINKS.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  onClick={(e) => scrollTo(e, id)}
+                  className={activeSection === id ? styles.active : ""}
+                >
+                  <span>{label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      {/* Social Icons */}
-      <div className={styles.socialIcons}>
-        <a href="https://www.facebook.com/iesinsins.yesudjdj" target="_blank" rel="noopener noreferrer">
+        {/* Social Icons */}
+        <div className={styles.socialIcons}>
+          <a href="https://www.facebook.com/iesinsins.yesudjdj" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="Facebook">
             <FaFacebookF />
-        </a>
-        <a href="https://www.instagram.com/2miii_ii" target="_blank" rel="noopener noreferrer">
-            <FaInstagram />
-        </a>
-        <a href="https://github.com/AdrianEarl000" target="_blank" rel="noopener noreferrer">
+          </a>
+          <a href="https://github.com/AdrianEarl000" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="GitHub">
             <FaGithub />
-        </a>
-      </div>
-    </header>
-  );
-};
+          </a>
+        </div>
 
-export default Header2;
+        {/* Hamburger */}
+        <button
+          className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+      </header>
+
+      {/* Mobile overlay */}
+      <div
+        className={`${styles.overlay} ${menuOpen ? styles.overlayOpen : ""}`}
+        onClick={() => setMenuOpen(false)}
+      />
+
+      {/* Mobile menu */}
+      <nav className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ""}`}>
+        {NAV_LINKS.map(({ id, label }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            onClick={(e) => scrollTo(e, id)}
+            className={activeSection === id ? styles.active : ""}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+    </>
+  );
+}

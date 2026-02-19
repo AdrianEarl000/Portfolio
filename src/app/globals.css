@@ -1,44 +1,31 @@
+/* Google Fonts MUST be first — before @import "tailwindcss" */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
+
 @import "tailwindcss";
 
-/* DESIGN 1 */
-
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
-/* DESIGN 2 - DARK & RED THEME */
+/* ── CSS VARIABLES ───────────────────────────────────────── */
 :root {
-  /* Core Colors */
-  --primary-bg: #050505;       /* Deep Black */
-  --accent-red: #ff3333;       /* Bright Red Pop */
-  --dark-red: #8a0000;         /* Darker Red for gradients */
-  --text-white: #ffffff;
-  
-  /* Background: Mostly black with a very subtle red glow at the bottom */
+  /* Colors */
+  --primary-bg:  #050505;
+  --accent-red:  #cc0000;
+  --dark-red:    #8a0000;
+  --text-white:  #ffffff;
   --gradient-bg: linear-gradient(180deg, #050505 0%, #050505 60%, #1a0000 100%);
+
+  /* Fonts */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+
+  /* Text scale */
+  --text-primary:   #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted:     rgba(255, 255, 255, 0.50);
+  --text-red:       #cc0000;
+  --text-red-dim:   rgba(200, 0, 0, 0.65);
 }
 
+/* ── BASE RESET ──────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -46,27 +33,25 @@ body {
 }
 
 body {
-  /* Apply the dark theme */
   background: var(--gradient-bg);
-  background-color: var(--primary-bg); /* Fallback */
+  background-color: var(--primary-bg);
   color: var(--text-white);
-  
-  /* Layout helpers */
+  font-family: var(--font-body);
+  font-size: 14px;
   min-height: 100vh;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif; /* Or your Geist font variables */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Global Link Styles */
 a {
   text-decoration: none;
   color: inherit;
   transition: color 0.3s ease;
 }
 
-/* Hover effect for all basic links to turn Red */
 a:hover {
   color: var(--accent-red);
 }
@@ -75,8 +60,154 @@ ul {
   list-style: none;
 }
 
-/* Optional: Selection color (when you highlight text) */
 ::selection {
   background-color: var(--accent-red);
   color: white;
+}
+
+/* ══════════════════════════════════════════════════════════
+   TYPOGRAPHY OVERRIDES — all sections
+   ══════════════════════════════════════════════════════════ */
+
+/* ── BODY / DESCRIPTION PARAGRAPHS ──────────────────────── */
+[class*="description"],
+[class*="card"] p,
+[class*="cardInner"] p,
+[class*="infoContent"] p,
+[class*="resume"] p,
+[class*="cert"] p,
+[class*="contact"] p {
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ── CARD TITLES ─────────────────────────────────────────── */
+[class*="card"] h3,
+[class*="card"] h4,
+[class*="cardInner"] h4 {
+  font-family: var(--font-display) !important;
+  font-size: 22px !important;
+  letter-spacing: 2px !important;
+  color: var(--text-primary) !important;
+  line-height: 1.2 !important;
+}
+
+/* ── COLUMN HEADINGS ─────────────────────────────────────── */
+[class*="colTitle"] h3 {
+  font-family: var(--font-display) !important;
+  font-size: 28px !important;
+  letter-spacing: 4px !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── ISSUERS / SUBTITLES ─────────────────────────────────── */
+[class*="issuer"],
+[class*="subtitle"] {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 3px !important;
+  color: var(--text-red) !important;
+  opacity: 1 !important;
+}
+
+/* ── DATE BADGES ─────────────────────────────────────────── */
+[class*="date"] {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 2px !important;
+  color: var(--text-red-dim) !important;
+  opacity: 1 !important;
+}
+
+/* ── HUD TAGS / NODE IDs ─────────────────────────────────── */
+[class*="hudTag"],
+[class*="nodeId"],
+[class*="dividerText"],
+[class*="colLabel"] {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  color: var(--text-red-dim) !important;
+  opacity: 1 !important;
+}
+
+/* ── RESUME LOCATION ─────────────────────────────────────── */
+[class*="location"] {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── STAT LABELS ─────────────────────────────────────────── */
+[class*="statLabel"] {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── TECH TAGS ───────────────────────────────────────────── */
+[class*="tag"]:not([class*="hudTag"]) {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+}
+
+/* ── CONTACT: FIELD LABELS ───────────────────────────────── */
+[class*="fieldLabel"] {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text-red-dim) !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+}
+
+/* ── CONTACT: INPUTS ─────────────────────────────────────── */
+[class*="input"],
+[class*="textarea"] {
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  letter-spacing: 0.02em !important;
+}
+[class*="input"]::placeholder,
+[class*="textarea"]::placeholder {
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  letter-spacing: 0.02em !important;
+  color: rgba(255, 255, 255, 0.28) !important;
+}
+
+/* ── CONTACT: INFO CONTENT ───────────────────────────────── */
+[class*="infoContent"] h4 {
+  font-family: var(--font-body) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--text-red-dim) !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+}
+[class*="infoContent"] p {
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.65 !important;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+[class*="copyright"] {
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.04em !important;
+  color: var(--text-muted) !important;
 }
